@@ -1,0 +1,33 @@
+<!--
+ * @Descripttion: 用户权限不够无法登陆
+ * @Author: BerryBC
+ * @Date: 2019-11-23 16:15:47
+ * @LastEditors: BerryBC
+ * @LastEditTime: 2019-12-08 22:34:56
+ -->
+
+{%extends "base.html" %} {% block mainbody %}
+
+<section class="mb-3 mt-5 firstSection">
+    <div class="container " style="text-align: center">
+
+        <img id="imgError" src="/static/img/cannotaccess.jpg" style="padding-top: 20px; padding-bottom: 20px;">
+
+        <div class="wow bounceInLeft" data-wow-delay="0.1s">
+            <h1>
+                <span>您权限不足，无法使用该功能，请登陆联系管理员提升权限。</span></h1>
+        </div>
+
+        <div class="col-sm-12">
+            <div>
+
+                <p><a class="btn btn-default btn-success" href="/" role="button" style="width: 400px;">返回主页</a></p>
+                <p><a class="btn btn-default btn-info" href="/user/login" role="button" style="width: 400px;">重新登陆</a></p>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

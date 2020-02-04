@@ -1,0 +1,48 @@
+<!--
+ * @Descripttion: 主页
+ * @version: 0.1.0
+ * @Author: BerryBC
+ * @Date: 2019-11-18 15:20:06
+ * @LastEditors  : BerryBC
+ * @LastEditTime : 2020-01-13 11:24:23
+ -->
+{%extends "base.html" %} {% block mainbody %}
+
+<section class="mb-3 mt-5 firstSection">
+    <div class="container">
+        <div class="row">
+            <div class="wow bounceInLeft col-12" data-wow-delay="0.1s">
+                <h2 style="border-bottom-style: groove;">Information Management Page</h2>
+            </div>
+            <div class="col-12 row">
+                <div class="col-12 col-md-4">
+                    <h4>Update Store List
+                    </h4>
+                    <p>更新店铺列表信息。</p>
+                    <p><a class="btn btn-outline-secondary" href="/info/upstorelist/" role="button">Karma Gain »</a></p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h4>Update Weekly Sales
+                    </h4>
+                    <p>更新周销售数据。</p>
+                    <p><a class="btn btn-outline-secondary" href="/sales/upweeklysales/" role="button">Karma Gain »</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="wow bounceInLeft col-12" data-wow-delay="0.1s">
+                <h2 style="border-bottom-style: groove;">User Management page</h2>
+            </div>
+            <div class="col-12 row">
+                <div class="col-12 col-md-4">
+                    <h4>User management
+                    </h4>
+                    <p>操作用户管理页面。</p>
+                    <p><a class="btn btn-outline-secondary" href="/user/manageuser/" role="button">Karma Gain »</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
