@@ -1,0 +1,177 @@
+<!--
+ * @Descripttion: 用户管理页面
+ * @version: 0.1.0
+ * @Author: BerryBC
+ * @Date: 2019-10-24 17:49:07
+ * @LastEditors  : BerryBC
+ * @LastEditTime : 2019-12-24 14:12:42
+ -->
+{%extends "base.html" %}
+{% block mainbody %}
+
+<section class="firstSection">
+    <div class="container">
+        <h2>User Management</h2>
+        <div class="row">
+            <div class="table-responsive">
+                <table id="tbUser" class="table table-striped dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>User Name</th>
+                            <th>User Power</th>
+                            <th>Reset Passwork</th>
+                            <th>Reset Power</th>
+                            <th>Delete User</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbodyC'>
+                        <tr>
+                            <td>1</td>
+                            <td>Test User 1</td>
+                            <td>No Power</td>
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#divResetPasswork">
+                                    Reset Passwork
+                                </button></td>
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#divResetPower">
+                                    Reset Power
+                                </button></td>
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
+                                    data-target="#divDeleteUser">
+                                    Reset Power
+                                </button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Test User 2</td>
+                            <td>Guan Li Yuan</td>
+                            <td>P</td>
+                            <td>P</td>
+                            <td>P</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section>
+    <div class="container">
+        <h2>Add New User</h2>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="txtUserName">Name of User</label>
+                <input type="text" id="txtUserName" class="form-control" placeholder="" required="">
+
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="txtPW">Passwork</label>
+                <input type="password" id="txtPW" class="form-control" placeholder="" required="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <label for="selPower">User Power</label>
+                <select class="custom-select d-block w-100" class="form-control" id="selPower" required="">
+                    <option value=0>Normal User</option>
+                    <option value=9>Admin</option>
+                </select>
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" id='btnAdd'>Add New User</button>
+    </div>
+</section>
+
+
+
+<!-- Modal -->
+<!-- 重设密码 -->
+<div class="modal fade" id="divResetPasswork" tabindex="-1" role="dialog" aria-labelledby="h5ResetPassworkTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="h5ResetPassworkTitle">Reset User Passwork</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12">
+                    <label for="inputPasswork" class="col-form-label" id="lbResetPasswork">User XXX Reset Password
+                        to</label>
+                    <input type="password" class="form-control" id="inputPasswork" placeholder="Password">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning" id="btnCReset">Reset!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 重设权限 -->
+<div class="modal fade" id="divResetPower" tabindex="-1" role="dialog" aria-labelledby="h5ResetPowerTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="h5ResetPowerTitle">User XXX Reset Power to</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12">
+                    <label for="selRePower" class="col-form-label">Power</label>
+                    <select class="custom-select d-block w-100" class="form-control" id="selRePower" required="">
+                        <option value=0>Normal User</option>
+                        <option value=9>Admin</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info" id="btnCResetPow">Reset!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 删除用户 -->
+<div class="modal fade" id="divDeleteUser" tabindex="-1" role="dialog" aria-labelledby="h5DeleteUserTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="h5DeleteUserTitle">Delete User XXX </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12">
+                    <label class="col-form-label" id="lbDeleteUser">Delete XXX Forever</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnCDelete">Delete!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /Modal -->
+
+
+<script src="/static/user/js/userman.js?q=201911231441" type="text/javascript"></script>
+<link href="/static/user/css/userman.css" rel="stylesheet" type="text/css" />
+{% endblock %}

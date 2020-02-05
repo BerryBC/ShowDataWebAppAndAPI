@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-04 22:00:55
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 00:46:54
+@LastEditTime : 2020-02-05 11:13:16
 '''
 
 import hashlib
@@ -15,6 +15,7 @@ from functools import wraps
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from datetime import timedelta
+from dateutil import parser
 
 from Lib.LMongoDB import claMongoDB
 
@@ -61,14 +62,15 @@ def funGetIn(strUser):
 
     # 使用 MongoDB
     strNow = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    dateNow=parser.parse(strNow)
     strToken = hashlib.md5(strNow.encode('utf-8')).hexdigest()[3:17]
-    dictNewOL = {'un': strUser, 'ut': strToken, 'lt': strNow}
+    dictNewOL = {'un': strUser, 'ut': strToken, 'lt': dateNow}
     objLoadOL=objLinkDB.LoadOne('userdb-OL', {'un': strUser})
     if objLoadOL is None:
-        objLinkDB.InsertOne('userdb-OL', dictNewPage)
+        objLinkDB.InsertOne('userdb-OL', dictNewOL)
     else:
         strToken=objLoadOL['ut']
-        objLinkDB.UpdateOneData('userdb-OL', {'un': strUser}, {'lt': strNow}})
+        objLinkDB.UpdateOneData('userdb-OL', {'un': strUser}, {'lt': dateNow})
     return strToken
 
 
@@ -135,7 +137,7 @@ def funHeartBeat():
     # 使用 MongoDB
     dtimeNow = datetime.datetime.now()
     dtimeBefore=timedelta(minutes=25)
-    dtimeBefore=(dtimeNow-dtimeBefore).strftime("%Y/%m/%d %H:%M:%S")
+    dtimeBefore=parser.parse((dtimeNow-dtimeBefore).strftime("%Y/%m/%d %H:%M:%S"))
     objLinkDB.DeleteSome('userdb-OL', {'lt': {'$lt':dtimeBefore}})
     threading.Timer(intInvOfHeartBeat, funHeartBeat).start()
 
@@ -307,7 +309,7 @@ def funUserResetPasswork(strUser, strPW):
     if objLoadUser is None:
         intResult=2
     else:
-        objLinkDB.UpdateOneData('userdb-AL', {'un': strUser}, {'upw': strPW}})
+        objLinkDB.UpdateOneData('userdb-AL', {'un': strUser}, {'upw': strPW})
         intResult=1
 
     return intResult
@@ -367,7 +369,7 @@ def funUserResetPwoer(strUser, strPower):
         bolCanDel=True
         if objLoadUser['up']==9:
             intCountAdm=0
-            arrSU=objLinkDB.LoadSome()('userdb-AL', {'up': 9})
+            arrSU=objLinkDB.LoadSome('userdb-AL', {'up': 9})
             for eleProxy in arrSU:
                 intCountAdm+=1
             if intCountAdm == 1:

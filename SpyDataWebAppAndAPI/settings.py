@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'UserCtrl',
 ]
 
 MIDDLEWARE = [
@@ -125,9 +127,7 @@ SESSION_COOKIE_HTTPONLY = True
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'Info/static'),
     os.path.join(BASE_DIR, 'UserCtrl/static'),
-    os.path.join(BASE_DIR, 'SalesMGT/static'),
 )
 
 STATICFILES_FINDERS = (
