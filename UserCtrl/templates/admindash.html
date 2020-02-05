@@ -6,8 +6,7 @@
  * @LastEditors  : BerryBC
  * @LastEditTime : 2019-12-24 14:12:42
  -->
-{%extends "base.html" %}
-{% block mainbody %}
+{%extends "base.html" %} {% block mainbody %}
 
 <section class="firstSection">
     <div class="container">
@@ -30,16 +29,13 @@
                             <td>1</td>
                             <td>Test User 1</td>
                             <td>No Power</td>
-                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#divResetPasswork">
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#divResetPasswork">
                                     Reset Passwork
                                 </button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#divResetPower">
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#divResetPower">
                                     Reset Power
                                 </button></td>
-                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal"
-                                    data-target="#divDeleteUser">
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#divDeleteUser">
                                     Reset Power
                                 </button></td>
                         </tr>
@@ -94,8 +90,7 @@
 
 <!-- Modal -->
 <!-- 重设密码 -->
-<div class="modal fade" id="divResetPasswork" tabindex="-1" role="dialog" aria-labelledby="h5ResetPassworkTitle"
-    aria-hidden="true">
+<div class="modal fade" id="divResetPasswork" tabindex="-1" role="dialog" aria-labelledby="h5ResetPassworkTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -119,8 +114,7 @@
     </div>
 </div>
 <!-- 重设权限 -->
-<div class="modal fade" id="divResetPower" tabindex="-1" role="dialog" aria-labelledby="h5ResetPowerTitle"
-    aria-hidden="true">
+<div class="modal fade" id="divResetPower" tabindex="-1" role="dialog" aria-labelledby="h5ResetPowerTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -146,8 +140,7 @@
     </div>
 </div>
 <!-- 删除用户 -->
-<div class="modal fade" id="divDeleteUser" tabindex="-1" role="dialog" aria-labelledby="h5DeleteUserTitle"
-    aria-hidden="true">
+<div class="modal fade" id="divDeleteUser" tabindex="-1" role="dialog" aria-labelledby="h5DeleteUserTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -173,5 +166,4 @@
 
 
 <script src="/static/user/js/userman.js?q=201911231441" type="text/javascript"></script>
-<link href="/static/user/css/userman.css" rel="stylesheet" type="text/css" />
-{% endblock %}
+<link href="/static/user/css/userman.css" rel="stylesheet" type="text/css" /> {% endblock %}

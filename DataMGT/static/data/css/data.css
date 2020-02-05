@@ -1,0 +1,8 @@
+textarea {
+    width: 80%;
+    resize: none;
+}
+
+#txtInsertSample {
+    color: brown;
+}

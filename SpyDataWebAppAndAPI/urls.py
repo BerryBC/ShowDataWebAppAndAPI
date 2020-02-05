@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-04 21:40:56
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 10:46:32
+@LastEditTime : 2020-02-05 12:57:40
 '''
 from django.contrib import admin
 from django.urls import include, path
@@ -14,4 +14,5 @@ urlpatterns = [
     path('cantacc/', views.funCannotAccess, name='Main'),
     path('notadm/', views.funNotAdm, name='Main'),
     path('user/', include('UserCtrl.urls')),
+    path('data/', include('DataMGT.urls')),
 ]

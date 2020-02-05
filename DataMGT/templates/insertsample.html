@@ -1,0 +1,39 @@
+<!--
+ * @Descripttion: 插入样本
+ * @Author: BerryBC
+ * @Date: 2020-02-05 13:29:36
+ * @LastEditors  : BerryBC
+ * @LastEditTime : 2020-02-05 13:34:39
+ -->
+{%extends "base.html" %} {% block mainbody %}
+<div class="container">
+    <section class="firstSection">
+        <h2>Insert New Sample</h2>
+        <div class="row m-auto justify-content-center">
+            <textarea id="taContent" rows="20"></textarea>
+
+        </div>
+        <hr class="mb-4">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="selPower">Emotions:</label>
+                <select class="custom-select d-block w-100" class="form-control" id="selEmo" required="">
+                    <option value=-1>Negative ( Bad )</option>
+                    <option value=0 selected>Useless</option>
+                    <option value=1>Positive ( God )</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3 ">
+                <label for="lbID">Alert:</label>
+                <!-- <div class="alert alert-dark " role="alert"> -->
+                <input disabled="value" id="txtInsertSample" value="This action is used to insert a new sample" class="form-control"></label>
+                <!-- </div> -->
+            </div>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id='btnAdd'>Insert Sample</button>
+    </section>
+</div>
+
+
+<!-- <script src="/static/data/js/userman.js?q=201911231441" type="text/javascript"></script> -->
+<link href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}
