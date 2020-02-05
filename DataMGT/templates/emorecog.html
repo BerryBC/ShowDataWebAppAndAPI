@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-02-05 12:20:50
  * @LastEditors  : BerryBC
- * @LastEditTime : 2020-02-05 13:24:07
+ * @LastEditTime : 2020-02-05 14:58:04
  -->
 {%extends "base.html" %} {% block mainbody %}
 <div class="container">
@@ -20,8 +20,13 @@
                 <select class="custom-select d-block w-100" class="form-control" id="selEmo" required="">
                     <option value=-1>Negative ( Bad )</option>
                     <option value=0 selected>Useless</option>
-                    <option value=1>Positive ( God )</option>
+                    <option value=1>Positive ( Good )</option>
                 </select>
+                <!-- <div class="radio">
+                    <input type="radio" name="radEmo" value="-1"> Negative ( Bad )</input><br/>
+                    <input type="radio" name="radEmo" value="0"> Useless</input><br/>
+                    <input type="radio" name="radEmo" value="1"> Positive ( Good )</input><br/>
+                </div> -->
             </div>
             <div class="col-md-6 mb-3 ">
                 <label for="lbID">Content ID:</label>
@@ -35,5 +40,5 @@
 </div>
 
 
-<!-- <script src="/static/data/js/userman.js?q=201911231441" type="text/javascript"></script> -->
+<script src="/static/data/js/emorecog.js?q=202002051437" type="text/javascript"></script>
 <link href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}
