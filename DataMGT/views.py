@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 15:30:44
+@LastEditTime : 2020-02-05 19:42:23
 '''
 
 from django.shortcuts import render, redirect
@@ -52,6 +52,49 @@ def apiConfirmSample(request):
     intEmo = int(request.POST.get('e'))
     strSampleID = request.POST.get('id')
     intResult = LDataCtrl.funConfirmSaple(strSampleID, intEmo)
+    resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiInsertSample(request):
+    intEmo = int(request.POST.get('e'))
+    strSampleID = request.POST.get('ct')
+    intResult = LDataCtrl.funInsertSample(intEmo, strSampleID)
+    resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiGetReusableSite(request):
+    intResult=0
+    arrAllSite=LDataCtrl.funListAllReusable()
+    intResult=1
+    resp = {'intBack': intResult,'arrSite':arrAllSite}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiDeleteReusableSite(request):
+    intResult=0
+    strID=request.POST.get('id')
+    intResult=LDataCtrl.funDeleteReusableSite(strID)
+    resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiInsertReusableSite(request):
+    intResult=0
+    strURL=request.POST.get('u')
+    intResult=LDataCtrl.funInsertReusableSite(strURL)
     resp = {'intBack': intResult}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
