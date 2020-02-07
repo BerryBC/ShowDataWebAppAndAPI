@@ -1,0 +1,50 @@
+<!--
+ * @Descripttion: 删除含关键字的样本
+ * @Author: BerryBC
+ * @Date: 2020-02-07 11:06:09
+ * @LastEditors  : BerryBC
+ * @LastEditTime : 2020-02-07 12:42:12
+ -->
+{%extends "base.html" %} {% block mainbody %}
+<div class="container">
+    <section class="firstSection">
+        <h2>Delete Sample Include Keyword</h2>
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="txtKeyWord">URL</label>
+                <input type="text" id="txtKeyWord" class="form-control" placeholder="e.g. 拼房帝" required="">
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-danger btn-lg btn-block" id='btnDel' data-toggle='modal' data-target="#divDeleteKeyWord">Delete Sample!!</button>
+    </section>
+</div>
+
+<!-- Modal -->
+<!-- 删除KeyWord -->
+<div class="modal fade" id="divDeleteKeyWord" tabindex="-1" role="dialog" aria-labelledby="h5DeleteKeyWordTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="h5DeleteKeyWordTitle">Delete KeyWord XXX </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12">
+                    <label class="col-form-label" id="lbDeleteKeyWord">Delete XXX Forever</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnCDelete">Delete!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Modal -->
+
+
+<script src="/static/data/js/deleteinclkeyword.js?q=20200207" type="text/javascript"></script>
+<KeyWord href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}

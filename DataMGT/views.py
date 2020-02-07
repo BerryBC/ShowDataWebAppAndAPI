@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 19:42:23
+@LastEditTime : 2020-02-07 15:00:50
 '''
 
 from django.shortcuts import render, redirect
@@ -31,6 +31,17 @@ def funInsertSample(request):
 @LuserCtrl.decoratedPageCheckAdm
 def funReuseLinkMGT(request):
     template = loader.get_template('reuselinkmgt.html')
+    return HttpResponse(template.render({}, request))
+
+
+@LuserCtrl.decoratedPageCheckAdm
+def funDeleteSampleKWPage(request):
+    template = loader.get_template('deleteinclkeyword.html')
+    return HttpResponse(template.render({}, request))
+
+@LuserCtrl.decoratedPageCheckAdm
+def funLoadTableDataCount(request):
+    template = loader.get_template('logdatacount.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -96,5 +107,31 @@ def apiInsertReusableSite(request):
     strURL=request.POST.get('u')
     intResult=LDataCtrl.funInsertReusableSite(strURL)
     resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiDeleteSampleWithKeyW(request):
+    intResult=0
+    strKW=request.POST.get('kw')
+    intDeleteCount=LDataCtrl.funDeleteSampleWithKW(strKW)
+    intResult=1
+    resp = {'intBack': intResult,'intDeleteCount':intDeleteCount}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiLoadAllTableCount(request):
+    intResult=0
+    strDataCount=LDataCtrl.funLoadCountOfNumber()
+    intResult=1
+    resp = {'intBack': intResult,'strFB':strDataCount}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')

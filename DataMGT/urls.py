@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 19:48:55
+@LastEditTime : 2020-02-07 14:56:25
 '''
 
 from django.urls import path
@@ -19,5 +19,9 @@ urlpatterns = [
     path('insertnewreusablesite/', views.apiInsertReusableSite, name='ManageData'),
     path('getallreuseablesite/', views.apiGetReusableSite, name='ManageData'),
     path('deletereusablepage/', views.apiDeleteReusableSite, name='ManageData'),
+    path('deletesamplewithkw/', views.apiDeleteSampleWithKeyW, name='ManageData'),
+    path('deletesamplepage/', views.funDeleteSampleKWPage, name='ManageData'),
+    path('getdatacount/', views.apiLoadAllTableCount, name='ManageData'),
+    path('getdatacountpage/', views.funLoadTableDataCount, name='ManageData'),
 
 ]

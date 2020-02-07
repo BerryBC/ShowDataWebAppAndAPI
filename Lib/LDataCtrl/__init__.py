@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 20:27:33
+@LastEditTime : 2020-02-07 14:59:52
 '''
 
 import hashlib
@@ -54,30 +54,58 @@ def funConfirmSaple(strID, intEmo):
 
 
 def funInsertSample(intEmo, strCT):
-    intResult=0
-    dictNew = {'ct': strCT, 'e': intEmo, 'cf': True, 'jed': True, 't':  int(time.time()*1000)}
-    objLinkDB.InsertOne('sampledb',dictNew)
-    intResult=1
+    intResult = 0
+    dictNew = {'ct': strCT, 'e': intEmo, 'cf': True,
+               'jed': True, 't':  int(time.time()*1000)}
+    objLinkDB.InsertOne('sampledb', dictNew)
+    intResult = 1
     return intResult
+
 
 def funListAllReusable():
-    arrReturn=[]
-    objAllSite=objLinkDB.LoadAllData('pagedb-Reuseable')
+    arrReturn = []
+    objAllSite = objLinkDB.LoadAllData('pagedb-Reuseable')
     for eleSite in objAllSite:
-        arrReturn.append({'_id':str(eleSite.get('_id')),'url':eleSite['url']})
+        arrReturn.append(
+            {'_id': str(eleSite.get('_id')), 'url': eleSite['url']})
     return arrReturn
 
+
 def funInsertReusableSite(strURL):
-    intResult=0
-    if objLinkDB.CheckOneExisit('pagedb-Reuseable',{'url':strURL}):
-        intResult=1
+    intResult = 0
+    if objLinkDB.CheckOneExisit('pagedb-Reuseable', {'url': strURL}):
+        intResult = 1
     else:
-        objLinkDB.InsertOne('pagedb-Reuseable',{'url':strURL})
-        intResult=2
+        objLinkDB.InsertOne('pagedb-Reuseable', {'url': strURL})
+        intResult = 2
     return intResult
 
+
 def funDeleteReusableSite(strID):
-    intResult=0
-    objLinkDB.DeleteSome('pagedb-Reuseable',{'_id': ObjectId(strID)})
-    intResult=1
+    intResult = 0
+    objLinkDB.DeleteSome('pagedb-Reuseable', {'_id': ObjectId(strID)})
+    intResult = 1
     return intResult
+
+
+def funDeleteSampleWithKW(strKeyW):
+    objDeleted = objLinkDB.DeleteSome(
+        'sampledb', {'ct': {'$regex': strKeyW, '$options': "i"}, 'cf': False})
+    # print(objDeleted.deleted_count)
+    return objDeleted.deleted_count
+
+
+def funLoadCountOfNumber():
+    strReturn = ''
+    arrDatabaseTable = []
+    arrDatabaseTable.append({'tbName': 'proxydb', 'Desp': '代理'})
+    arrDatabaseTable.append({'tbName': 'pagedb-Crawled', 'Desp': '已爬链接'})
+    arrDatabaseTable.append({'tbName': 'pagedb-Reuseable', 'Desp': '可重用链接'})
+    arrDatabaseTable.append({'tbName': 'sampledb', 'Desp': '样本'})
+    arrDatabaseTable.append({'tbName': 'userdb-OL', 'Desp': '在线用户'})
+    arrDatabaseTable.append({'tbName': 'userdb-AL', 'Desp': '全体用户'})
+    for eleTable in arrDatabaseTable:
+        strReturn += eleTable['Desp']+' 数据条数为:  ' + \
+            str(objLinkDB.LoadAllData(eleTable['tbName']).count()) + '\n'
+    # print(objDeleted.deleted_count)
+    return strReturn

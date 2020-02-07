@@ -4,13 +4,13 @@
  * @Author: BerryBC
  * @Date: 2019-11-18 15:20:06
  * @LastEditors  : BerryBC
- * @LastEditTime : 2020-02-05 19:15:13
+ * @LastEditTime : 2020-02-07 14:57:09
  -->
 {%extends "base.html" %} {% block mainbody %}
 
 <section class="mb-3 mt-5 firstSection">
     <div class="container">
-        <!-- <div class="row">
+        <div class="row">
             <div class="wow bounceInLeft col-12" data-wow-delay="0.1s">
                 <h2 style="border-bottom-style: groove;">Present data</h2>
             </div>
@@ -19,10 +19,10 @@
                     <h4>Data scale
                     </h4>
                     <p>数据规模</p>
-                    <p><a class="btn btn-outline-secondary" href="#" role="button">Karma Gain »</a></p>
+                    <p><a class="btn btn-outline-secondary" href="/data/getdatacountpage/" role="button">Karma Gain »</a></p>
                 </div>
             </div>
-        </div> -->
+        </div>
         <div class="row">
             <div class="wow bounceInLeft col-12" data-wow-delay="0.1s">
                 <h2 style="border-bottom-style: groove;">Samples Management Page</h2>
@@ -39,6 +39,12 @@
                     </h4>
                     <p>插入新的页面内容及情绪判断</p>
                     <p><a class="btn btn-outline-secondary" href="/data/insertsample/" role="button">Karma Gain »</a></p>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h4>Delete samples based on keywords
+                    </h4>
+                    <p>根据关键词删除样本</p>
+                    <p><a class="btn btn-outline-secondary" href="/data/deletesamplepage/" role="button">Karma Gain »</a></p>
                 </div>
                 <div class="col-12 col-md-4">
                     <h4>Reuse page management
