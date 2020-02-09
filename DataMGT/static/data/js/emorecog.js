@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-02-05 14:11:33
  * @LastEditors  : BerryBC
- * @LastEditTime : 2020-02-05 15:45:00
+ * @LastEditTime : 2020-02-09 20:56:46
  */
 $(function() {
     LoadASample();
@@ -36,6 +36,11 @@ $(function() {
             }
         });
     };
+
+    $('#btnNext')[0].onclick = function() {
+        LoadASample()
+    };
+
 });
 
 function LoadASample() {
@@ -70,4 +75,4 @@ function ShowSample(objSample) {
     $('#taContent').val(objSample.ct);
     $('#selEmo').val(0);
     $('#lbID').val(objSample._id);
-};
+};;
