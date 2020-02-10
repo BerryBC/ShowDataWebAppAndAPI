@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-07 14:59:52
+@LastEditTime : 2020-02-10 23:40:25
 '''
 
 import hashlib
@@ -109,3 +109,31 @@ def funLoadCountOfNumber():
             str(objLinkDB.LoadAllData(eleTable['tbName']).count()) + '\n'
     # print(objDeleted.deleted_count)
     return strReturn
+
+
+def funListAllCustom():
+    arrReturn = []
+    objAllSite = objLinkDB.LoadAllData('pagedb-Custom')
+    for eleSite in objAllSite:
+        arrReturn.append(
+            {'_id': str(eleSite.get('_id')), 'tag': eleSite['tag'], 'rURL': eleSite['rURL']})
+    return arrReturn
+
+
+def funInsertCustom(strInTag, strInRURL):
+    intResult = 0
+    if objLinkDB.CheckOneExisit('pagedb-Custom', {'rURL': strInRURL}):
+        intResult = 1
+    else:
+        objLinkDB.InsertOne(
+            'pagedb-Custom', {'tag': strInTag, 'rURL': strInRURL})
+        intResult = 2
+    return intResult
+
+
+
+def funDeleteCustom(strInID):
+    intResult = 0
+    objLinkDB.DeleteSome('pagedb-Custom', {'_id': ObjectId(strInID)})
+    intResult = 1
+    return intResult

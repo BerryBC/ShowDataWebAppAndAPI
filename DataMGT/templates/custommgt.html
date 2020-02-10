@@ -1,0 +1,97 @@
+<!--
+ * @Descripttion: 
+ * @Author: BerryBC
+ * @Date: 2020-02-10 22:32:42
+ * @LastEditors  : BerryBC
+ * @LastEditTime : 2020-02-10 22:44:24
+ -->
+{%extends "base.html" %} {% block mainbody %}
+
+<section class="firstSection">
+    <div class="container">
+        <h2>Custom Info. Management</h2>
+        <div class="row">
+            <div class="table-responsive">
+                <table id="tbCustom" class="table table-striped dt-responsive nowrap w-100">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tag</th>
+                            <th>Key URL</th>
+                            <th>Delete URL</th>
+                        </tr>
+                    </thead>
+                    <tbody id='tbodyC'>
+                        <tr>
+                            <td>1</td>
+                            <td>.WB_text</td>
+                            <td>weibo.com</td>
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#divDeleteCustom">
+                                    Delete
+                                </button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>.bbs-content,.ir-content</td>
+                            <td>bbs.tianya.cn</td>
+                            <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#divDeleteCustom">
+                                Delete
+                                </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container">
+        <h2>Add New Custom Info.</h2>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="txtTag">URL</label>
+                <input type="text" id="txtTag" class="form-control" placeholder=".WB_text,p" required="">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="txtKeyURL">URL</label>
+                <input type="text" id="txtKeyURL" class="form-control" placeholder="weibo.com" required="">
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" id='btnAdd'>Add New User</button>
+    </div>
+</section>
+
+
+
+<!-- Modal -->
+<!-- 删除Custom -->
+<div class="modal fade" id="divDeleteCustom" tabindex="-1" role="dialog" aria-labelledby="h5DeleteCustomTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="h5DeleteCustomTitle">Delete Link XXX </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group col-md-12">
+                    <label class="col-form-label" id="lbDeleteCustom">Delete XXX Forever</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" id="btnCDelete">Delete!!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /Modal -->
+
+
+<script src="/static/data/js/custommgt.js?q=20200210" type="text/javascript"></script>
+<link href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}

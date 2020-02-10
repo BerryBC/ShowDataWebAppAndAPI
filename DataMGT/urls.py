@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-07 14:56:25
+@LastEditTime : 2020-02-10 23:11:39
 '''
 
 from django.urls import path
@@ -23,5 +23,8 @@ urlpatterns = [
     path('deletesamplepage/', views.funDeleteSampleKWPage, name='ManageData'),
     path('getdatacount/', views.apiLoadAllTableCount, name='ManageData'),
     path('getdatacountpage/', views.funLoadTableDataCount, name='ManageData'),
-
+    path('custommgt/', views.funMGTCustom, name='ManageData'),
+    path('getallcustominfo/', views.apiGetCustom, name='ManageData'),
+    path('insertcustominfo/', views.apiInsertCustom, name='ManageData'),
+    path('deletecustominfo/', views.apiDeleteCustom, name='ManageData'),
 ]

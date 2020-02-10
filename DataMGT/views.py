@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-07 15:00:50
+@LastEditTime : 2020-02-10 23:08:50
 '''
 
 from django.shortcuts import render, redirect
@@ -42,6 +42,11 @@ def funDeleteSampleKWPage(request):
 @LuserCtrl.decoratedPageCheckAdm
 def funLoadTableDataCount(request):
     template = loader.get_template('logdatacount.html')
+    return HttpResponse(template.render({}, request))
+
+@LuserCtrl.decoratedPageCheckAdm
+def funMGTCustom(request):
+    template = loader.get_template('custommgt.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -135,3 +140,43 @@ def apiLoadAllTableCount(request):
     resp = {'intBack': intResult,'strFB':strDataCount}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+        
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiGetCustom(request):
+    intResult=0
+    arrAllData=LDataCtrl.funListAllCustom()
+    intResult=1
+    resp = {'intBack': intResult,'arrData':arrAllData}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiInsertCustom(request):
+    intResult=0
+    strTag=request.POST.get('t')
+    strKeyURL=request.POST.get('u')
+    intResult=LDataCtrl.funInsertCustom(strTag,strKeyURL)
+    resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAdm
+def apiDeleteCustom(request):
+    intResult=0
+    strID=request.POST.get('i')
+    intResult=LDataCtrl.funDeleteCustom(strID)
+    resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
