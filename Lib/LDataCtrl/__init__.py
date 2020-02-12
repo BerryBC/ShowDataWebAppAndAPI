@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-10 23:40:25
+@LastEditTime : 2020-02-12 18:21:17
 '''
 
 import hashlib
@@ -104,10 +104,15 @@ def funLoadCountOfNumber():
     arrDatabaseTable.append({'tbName': 'sampledb', 'Desp': '样本'})
     arrDatabaseTable.append({'tbName': 'userdb-OL', 'Desp': '在线用户'})
     arrDatabaseTable.append({'tbName': 'userdb-AL', 'Desp': '全体用户'})
+
     for eleTable in arrDatabaseTable:
         strReturn += eleTable['Desp']+' 数据条数为:  ' + \
             str(objLinkDB.LoadAllData(eleTable['tbName']).count()) + '\n'
     # print(objDeleted.deleted_count)
+    
+    strReturn+='  已经判断及情绪为 正面 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':1,'cf':True})+'\n'
+    strReturn+='  已经判断及情绪为 无价值 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':0,'cf':True})+'\n'
+    strReturn+='  已经判断及情绪为 负面 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':-1,'cf':True})+'\n'
     return strReturn
 
 
