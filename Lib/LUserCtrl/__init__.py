@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-04 22:00:55
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-05 17:45:46
+@LastEditTime : 2020-02-12 17:43:31
 '''
 
 import hashlib
@@ -540,22 +540,28 @@ def decoratedPageCheckAcc(f):
 def decoratedApiCheckAcc(f):
     @wraps(f)
     def decorated(request, *args, **kwargs):
-        strUserN=request.get_signed_cookie(
-            'un', default = "nouser", salt = 'BY2')
-        strUserT=request.get_signed_cookie(
-            'ut', default = "nouser", salt = 'BY2')
-        bolFBCheck=funCheckToken(strUserN, strUserT)
-        if bolFBCheck:
-            if(request.method == 'POST'):
-                funGetIn(strUserN)
-                return f(request, *args, **kwargs)
+        try:
+            strUserN=request.get_signed_cookie(
+                'un', default = "nouser", salt = 'BY2')
+            strUserT=request.get_signed_cookie(
+                'ut', default = "nouser", salt = 'BY2')
+            bolFBCheck=funCheckToken(strUserN, strUserT)
+            if bolFBCheck:
+                if(request.method == 'POST'):
+                    funGetIn(strUserN)
+                    return f(request, *args, **kwargs)
+                else:
+                    resp={'intBack': 99}
+                    return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
             else:
-                resp={'intBack': 99}
-                return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
-        else:
-            resp={'intBack': 98}
-            return HttpResponse(content = json.dumps(
-                resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
+                resp={'intBack': 98}
+                return HttpResponse(content = json.dumps(
+                    resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
+        except Exception as e:
+            print(' Error at "ApiCheckAcc" ' +
+                time.strftime('%Y-%m-%d %H:%M:%S')+'\n'+str(e))
+            resp={'intBack': 99}
+            return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
     return decorated
 
 
@@ -572,21 +578,27 @@ def decoratedApiCheckAcc(f):
 def decoratedApiCheckAdm(f):
     @wraps(f)
     def decorated(request, *args, **kwargs):
-        strUserN=request.get_signed_cookie(
-            'un', default = "nouser", salt = 'BY2')
-        strUserT=request.get_signed_cookie(
-            'ut', default = "nouser", salt = 'BY2')
-        bolFBCheck=funCheckToken(strUserN, strUserT)
-        bolAdmCheck=funCheckAdmin(strUserN)
-        if bolFBCheck and bolAdmCheck:
-            if(request.method == 'POST'):
-                funGetIn(strUserN)
-                return f(request, *args, **kwargs)
+        try:
+            strUserN=request.get_signed_cookie(
+                'un', default = "nouser", salt = 'BY2')
+            strUserT=request.get_signed_cookie(
+                'ut', default = "nouser", salt = 'BY2')
+            bolFBCheck=funCheckToken(strUserN, strUserT)
+            bolAdmCheck=funCheckAdmin(strUserN)
+            if bolFBCheck and bolAdmCheck:
+                if(request.method == 'POST'):
+                    funGetIn(strUserN)
+                    return f(request, *args, **kwargs)
+                else:
+                    resp={'intBack': 99}
+                    return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
             else:
-                resp={'intBack': 99}
-                return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
-        else:
-            resp={'intBack': 98}
-            return HttpResponse(content = json.dumps(
-                resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
+                resp={'intBack': 98}
+                return HttpResponse(content = json.dumps(
+                    resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
+        except Exception as e:
+            print(' Error at "ApiCheckAdm" ' +
+                time.strftime('%Y-%m-%d %H:%M:%S')+'\n'+str(e))
+            resp={'intBack': 99}
+            return HttpResponse(content = json.dumps(resp), content_type = 'application/json;charset = utf-8', charset = 'utf-8')
     return decorated
