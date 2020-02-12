@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors  : BerryBC
-@LastEditTime : 2020-02-12 18:21:17
+@LastEditTime : 2020-02-12 18:36:02
 '''
 
 import hashlib
@@ -110,9 +110,9 @@ def funLoadCountOfNumber():
             str(objLinkDB.LoadAllData(eleTable['tbName']).count()) + '\n'
     # print(objDeleted.deleted_count)
     
-    strReturn+='  已经判断及情绪为 正面 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':1,'cf':True})+'\n'
-    strReturn+='  已经判断及情绪为 无价值 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':0,'cf':True})+'\n'
-    strReturn+='  已经判断及情绪为 负面 的数据条数为:  '+objLinkDB.LoadSome('sampledb',{'e':-1,'cf':True})+'\n'
+    strReturn+='  已经判断及情绪为 正面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':1,'cf':True}).count())+'\n'
+    strReturn+='  已经判断及情绪为 无价值 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':0,'cf':True}).count())+'\n'
+    strReturn+='  已经判断及情绪为 负面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':-1,'cf':True}).count())+'\n'
     return strReturn
 
 
