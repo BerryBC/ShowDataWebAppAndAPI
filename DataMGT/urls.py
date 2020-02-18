@@ -2,8 +2,8 @@
 @Descripttion: 解释数据页面 URL 
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
-@LastEditors  : BerryBC
-@LastEditTime : 2020-02-10 23:11:39
+@LastEditors: BerryBC
+@LastEditTime: 2020-02-18 21:58:44
 '''
 
 from django.urls import path
@@ -27,4 +27,8 @@ urlpatterns = [
     path('getallcustominfo/', views.apiGetCustom, name='ManageData'),
     path('insertcustominfo/', views.apiInsertCustom, name='ManageData'),
     path('deletecustominfo/', views.apiDeleteCustom, name='ManageData'),
+    path('spydata/', views.funSpyDataCheck, name='ManageData'),
+    path('spydatawithtag/', views.apiSpyDataWithTag, name='ManageData'),
+
+    
 ]

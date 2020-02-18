@@ -1,0 +1,35 @@
+<!--
+ * @Descripttion: 测试爬虫爬出来内容
+ * @Author: BerryBC
+ * @Date: 2020-02-18 18:45:09
+ * @LastEditors: BerryBC
+ * @LastEditTime: 2020-02-18 21:56:57
+ -->
+{%extends "base.html" %} {% block mainbody %}
+
+<div class="container">
+    <section class="firstSection">
+        <h2>What Can It Spy</h2>
+        <div class="row m-auto justify-content-center">
+            <textarea id="taContent" rows="20"></textarea>
+        </div>
+    </section>
+    <section class="secondSection">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="txtTag">Input Tag</label>
+                <input type="text" id="txtTag" class="form-control" placeholder="e.g. .content">
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="txtURL">Input URL</label>
+                <input type="text" id="txtURL" class="form-control" placeholder="e.g. https://www.baidu.com">
+            </div>
+        </div>
+        <hr class="mb-4">
+        <button class="btn btn-info btn-lg btn-block" id='btnSpy'>Check Spy</button>
+    </section>
+</div>
+
+
+<script src="/static/data/js/spydatacheck.js?q=202002182156" type="text/javascript"></script>
+<link href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}

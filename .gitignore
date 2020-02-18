@@ -131,3 +131,4 @@ dmypy.json
 Support/
 .vscode/
 logs/
+static/tmp/

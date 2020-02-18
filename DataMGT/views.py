@@ -2,14 +2,15 @@
 @Descripttion: 数据解释 Views 页面
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
-@LastEditors  : BerryBC
-@LastEditTime : 2020-02-10 23:08:50
+@LastEditors: BerryBC
+@LastEditTime: 2020-02-18 22:05:27
 '''
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import Lib.LUserCtrl as LuserCtrl
 import Lib.LDataCtrl as LDataCtrl
+import Lib.LSpy as LSpy
 from django.template import loader
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -47,6 +48,11 @@ def funLoadTableDataCount(request):
 @LuserCtrl.decoratedPageCheckAdm
 def funMGTCustom(request):
     template = loader.get_template('custommgt.html')
+    return HttpResponse(template.render({}, request))
+
+@LuserCtrl.decoratedPageCheckAcc
+def funSpyDataCheck(request):
+    template = loader.get_template('spydatacheck.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -176,6 +182,23 @@ def apiDeleteCustom(request):
     strID=request.POST.get('i')
     intResult=LDataCtrl.funDeleteCustom(strID)
     resp = {'intBack': intResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAcc
+def apiSpyDataWithTag(request):
+    intResult=1
+    strTag=request.POST.get('t')
+    strURL=request.POST.get('u')
+    strErr,strResult=LSpy.funSpyDataWithTag(strURL,strTag)
+    if not strErr is None:
+        intResult=0
+        strResult=strErr
+    resp = {'intBack': intResult,'strCT':strResult}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 

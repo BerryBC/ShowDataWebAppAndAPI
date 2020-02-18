@@ -3,7 +3,7 @@ $(function() {
 
 
     $('#btnAdd')[0].onclick = function() {
-        if ($("#txtTag").val() == "" && $("#txtKeyURL").val() == "") {
+        if ($("#txtTag").val() == "" || $("#txtKeyURL").val() == "") {
             ShowModal(false, 'Neither Tag and Key URL could not be BLANK!')
         } else {
             var formData = new FormData();
