@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-02-23 22:02:50
+@LastEditTime: 2020-03-24 23:13:19
 '''
 
 import Lib.LUserCtrl as LuserCtrl
@@ -214,23 +214,3 @@ def apiSpyDataWithTag(request):
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 
 
-
-@csrf_exempt
-@LuserCtrl.decoratedPageCheckAdm
-def wsCreatSklearnModel(request):
-    
-    intN=0
-    print('connect')
-    print(request)
-    request.websocket.send('开始'.encode('utf-8'))
-    time.sleep(1)        
-    request.websocket.send(str(intN).encode('utf-8'))
-    intN+=1
-    request.websocket.send(str(intN).encode('utf-8'))
-    intN+=1
-    request.websocket.send(str(intN).encode('utf-8'))
-    intN+=1
-    request.websocket.send(str(intN).encode('utf-8'))
-    intN+=1
-    request.websocket.send('结束'.encode('utf-8'))
-    print(request.websocket)

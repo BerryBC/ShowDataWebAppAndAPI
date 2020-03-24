@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors: BerryBC
-@LastEditTime: 2020-02-24 23:49:11
+@LastEditTime: 2020-03-24 23:14:16
 '''
 
 from django.urls import path
@@ -44,7 +44,5 @@ urlpatterns = [
     # 试爬网页
     path('spydatawithtag/', views.apiSpyDataWithTag, name='ManageData'),
 
-    # 创建 sklearn 模型    
-    # path('sklcws/', views.wsCreatSklearnModel, name='ManageData'),
     
 ]
