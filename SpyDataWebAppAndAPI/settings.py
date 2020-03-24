@@ -25,7 +25,7 @@ SECRET_KEY = 'rf^qfp%v%_6b*=(s&lb&529g9!dr8zyw=8#nd(-@vg$wgdfsz@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1','*']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'UserCtrl',
     'DataMGT',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,13 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
+
+ASGI_APPLICATION = "SpyDataWebAppAndAPI.routing.application"
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             "hosts": [('10.1.210.33', 6379)], 
+#         },
+#     },
+# }

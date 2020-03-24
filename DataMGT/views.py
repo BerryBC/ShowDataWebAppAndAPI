@@ -3,18 +3,21 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-02-18 22:05:27
+@LastEditTime: 2020-02-23 22:02:50
 '''
 
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
 import Lib.LUserCtrl as LuserCtrl
 import Lib.LDataCtrl as LDataCtrl
 import Lib.LSpy as LSpy
-from django.template import loader
+
 import json
+import time
+
 from django.views.decorators.csrf import csrf_exempt
 from django.http.response import JsonResponse
+from django.shortcuts import render, redirect
+from django.template import loader
+from django.http import HttpResponse
 
 
 @LuserCtrl.decoratedPageCheckAdm
@@ -55,6 +58,14 @@ def funSpyDataCheck(request):
     template = loader.get_template('spydatacheck.html')
     return HttpResponse(template.render({}, request))
 
+@LuserCtrl.decoratedPageCheckAdm
+def funSklearnModelCreat(request):
+    template = loader.get_template('sklearnmodelc.html')
+    return HttpResponse(template.render({}, request))
+
+
+# ----------------- 以上页面 ----------------
+# ----------------- 以下API ----------------
 
 @csrf_exempt
 @LuserCtrl.decoratedApiCheckAdm
@@ -203,3 +214,23 @@ def apiSpyDataWithTag(request):
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 
 
+
+@csrf_exempt
+@LuserCtrl.decoratedPageCheckAdm
+def wsCreatSklearnModel(request):
+    
+    intN=0
+    print('connect')
+    print(request)
+    request.websocket.send('开始'.encode('utf-8'))
+    time.sleep(1)        
+    request.websocket.send(str(intN).encode('utf-8'))
+    intN+=1
+    request.websocket.send(str(intN).encode('utf-8'))
+    intN+=1
+    request.websocket.send(str(intN).encode('utf-8'))
+    intN+=1
+    request.websocket.send(str(intN).encode('utf-8'))
+    intN+=1
+    request.websocket.send('结束'.encode('utf-8'))
+    print(request.websocket)
