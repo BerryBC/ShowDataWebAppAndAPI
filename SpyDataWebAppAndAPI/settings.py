@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'UserCtrl',
     'DataMGT',
-    'channels',
+    # 'channels',
 ]
 
 MIDDLEWARE = [
