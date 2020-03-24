@@ -5,15 +5,15 @@
 @LastEditors: BerryBC
 @LastEditTime: 2020-03-24 23:00:13
 '''
-# from channels.auth import AuthMiddlewareStack
-# from channels.routing import ProtocolTypeRouter, URLRouter
-# import DataMGT.routing
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+import DataMGT.routing
 
-# application = ProtocolTypeRouter({
-#     # (http->django views is added by default)
-#     'websocket': AuthMiddlewareStack(
-#         URLRouter(
-#             DataMGT.routing.websocket_urlpatterns
-#         )
-#     ),
-# })
+application = ProtocolTypeRouter({
+    # (http->django views is added by default)
+    'websocket': AuthMiddlewareStack(
+        URLRouter(
+            DataMGT.routing.websocket_urlpatterns
+        )
+    ),
+})

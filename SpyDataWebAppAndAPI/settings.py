@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'UserCtrl',
     'DataMGT',
-    # 'channels',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -137,7 +137,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
-# ASGI_APPLICATION = "SpyDataWebAppAndAPI.routing.application"
+ASGI_APPLICATION = "SpyDataWebAppAndAPI.routing.application"
 # CHANNEL_LAYERS = {
 #     'default': {
 #         'BACKEND': 'channels_redis.core.RedisChannelLayer',
