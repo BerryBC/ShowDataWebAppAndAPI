@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 16:59:06
+@LastEditTime: 2020-03-29 17:05:52
 '''
 import json
 import jieba
@@ -15,6 +15,8 @@ import joblib
 import os
 import datetime
 
+
+from dateutil import parser
 from sklearn.svm import LinearSVC
 from configobj import ConfigObj
 from sklearn.ensemble import BaggingClassifier
@@ -190,9 +192,9 @@ def funGoLearn(funFB2C):
     joblib.dump(
         clfBagging, strSavePath)
 
-    dictData={}
-    dictData['clfFileName']=strFileName
-    dictData['kwlist']=nparrKWWaitFor
+    strNow = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
+    dateNow=parser.parse(strNow)
+    dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor,'lt':dateNow}
     objLinkDB.InsertOne('clfdb', dictData)
 
     
