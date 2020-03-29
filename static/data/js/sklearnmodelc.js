@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-02-23 10:38:36
  * @LastEditors: BerryBC
- * @LastEditTime: 2020-03-10 23:12:32
+ * @LastEditTime: 2020-03-29 15:35:06
  */
 $(function() {
     $('#btnCreat')[0].onclick = function() {
@@ -13,16 +13,29 @@ $(function() {
 
             $('#btnCreat').addClass('disabled');
             $('#btnCreat').attr('disabled', true);
-
+            $('#taContent').val($('#taContent').val() + 'Try to connected \n')
             wsSocks.onopen = function() {
-                $('#taContent').val($('#taContent').val() + ' Connected \n')
+                $('#taContent').val($('#taContent').val() + ' Connected \n');
             };
 
             wsSocks.onmessage = function(evt) {
-                var received_msg = JSON.parse(evt.data);
-                received_msg = received_msg.message;
+                var jsonRevData = JSON.parse(evt.data);
+                intCode = jsonRevData.code;
+                strRev = jsonRevData.msg;
 
-                $('#taContent').val($('#taContent').val() + received_msg + '\n')
+                if (intCode == 1) {
+                    $('#taContent').val($('#taContent').val() + ' Server confirm connected \n');
+                    wsSocks.send(JSON.stringify({
+                        'doCode': 0
+                    }));
+                } else if (intCode == 2) {
+                    $('#taContent').val($('#taContent').val() + '  ' + strRev + '\n');
+                } else if (intCode == 3) {
+                    $('#taContent').val($('#taContent').val() + ' Done creat classification\n');
+                    wsSocks.close();
+                };
+
+                $('#taContent').val($('#taContent').val() + received_msg + '\n');
                 setTimeout(() => {
                     wsSocks.send(JSON.stringify({
                         'message': 1
@@ -37,7 +50,7 @@ $(function() {
                 $('#btnCreat').attr('disabled', false);
             };
         } else {
-            $('#taContent').val('Your 浏览器 can\'t support Websocket!')
+            $('#taContent').val('Your 浏览器 can\'t support Websocket!');
         }
     };
 });
