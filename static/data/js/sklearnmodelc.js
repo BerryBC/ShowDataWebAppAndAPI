@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-02-23 10:38:36
  * @LastEditors: BerryBC
- * @LastEditTime: 2020-03-29 15:44:03
+ * @LastEditTime: 2020-03-29 16:24:36
  */
 $(function() {
     $('#btnCreat')[0].onclick = function() {
@@ -15,7 +15,7 @@ $(function() {
             $('#btnCreat').attr('disabled', true);
             $('#taContent').val($('#taContent').val() + 'Try to connected \n')
             wsSocks.onopen = function() {
-                $('#taContent').val($('#taContent').val() + ' Connected \n');
+                $('#taContent').val($('#taContent').val() + ' - Connected \n');
             };
 
             wsSocks.onmessage = function(evt) {
@@ -24,20 +24,20 @@ $(function() {
                 strRev = jsonRevData.msg;
 
                 if (intCode == 1) {
-                    $('#taContent').val($('#taContent').val() + ' Server confirm connected \n');
+                    $('#taContent').val($('#taContent').val() + ' - Server confirm connected \n');
                     wsSocks.send(JSON.stringify({
                         'doCode': 0
                     }));
                 } else if (intCode == 2) {
-                    $('#taContent').val($('#taContent').val() + '  ' + strRev + '\n');
+                    $('#taContent').val($('#taContent').val() + '  - - ' + strRev + '\n');
                 } else if (intCode == 3) {
-                    $('#taContent').val($('#taContent').val() + ' Done creat classification\n');
+                    $('#taContent').val($('#taContent').val() + ' - Done creat classification\n');
                     wsSocks.close();
                 };
             };
 
             wsSocks.onclose = function() {
-                $('#taContent').val($('#taContent').val() + ' Closed \n');
+                $('#taContent').val($('#taContent').val() + ' - Closed \n');
 
                 $('#btnCreat').removeClass('disabled');
                 $('#btnCreat').attr('disabled', false);
