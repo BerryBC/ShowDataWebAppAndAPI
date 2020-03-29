@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-24 23:40:18
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 15:20:12
+@LastEditTime: 2020-03-29 15:41:00
 '''
 
 import json
@@ -15,7 +15,7 @@ from channels.generic.websocket import WebsocketConsumer
 
 class wsCreatSklearnModel(WebsocketConsumer):
 
-    def funFB2C(strMsg, intCode):
+    def funFB2C(self,strMsg, intCode):
         self.send(text_data=json.dumps({
             'msg': strMsg, 'code': intCode
         }))
