@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 17:05:52
+@LastEditTime: 2020-03-29 17:08:44
 '''
 import json
 import jieba
@@ -194,7 +194,7 @@ def funGoLearn(funFB2C):
 
     strNow = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
     dateNow=parser.parse(strNow)
-    dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor,'lt':dateNow}
+    dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor.tolist(),'lt':dateNow}
     objLinkDB.InsertOne('clfdb', dictData)
 
     
