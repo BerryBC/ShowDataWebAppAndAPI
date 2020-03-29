@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 17:08:44
+@LastEditTime: 2020-03-29 17:13:58
 '''
 import json
 import jieba
@@ -42,11 +42,11 @@ def funGoLearn(funFB2C):
     # 反馈给客户端信息
     funFB2C('Start Load Sample', 2)
     curPos = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': 1}}, {'$sample': {'size': 20}}])
+        [{'$match': {'cf': True, 'e': 1}}, {'$sample': {'size': 300}}])
     curUseless = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 20}}])
+        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 300}}])
     curNeg = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': -1}}, {'$sample': {'size': 20}}])
+        [{'$match': {'cf': True, 'e': -1}}, {'$sample': {'size': 300}}])
 
     arrStopWord = [' ', '\n', '\t']
 
@@ -197,5 +197,5 @@ def funGoLearn(funFB2C):
     dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor.tolist(),'lt':dateNow}
     objLinkDB.InsertOne('clfdb', dictData)
 
-    
-    # 把JS做好，然后再把结果、关键字存入数据库，然后做好文件存储
+    # 输出文件名
+    funFB2C('classification file is : '+ strFileName, 2)
