@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 16:55:25
+@LastEditTime: 2020-03-29 16:59:06
 '''
 import json
 import jieba
@@ -191,9 +191,9 @@ def funGoLearn(funFB2C):
         clfBagging, strSavePath)
 
     dictData={}
-    dictData['clfFileName']=strFileName    
+    dictData['clfFileName']=strFileName
     dictData['kwlist']=nparrKWWaitFor
-    objLinkDB.InsertOne('clfdb', dictNewUser)
+    objLinkDB.InsertOne('clfdb', dictData)
 
     
     # 把JS做好，然后再把结果、关键字存入数据库，然后做好文件存储
