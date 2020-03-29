@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 15:17:34
+@LastEditTime: 2020-03-29 15:38:03
 '''
 import json
 import jieba
@@ -187,7 +187,7 @@ def funGoLearn(funFB2C):
 
     # 输出信息
     funFB2C('Output Data', 2)
-    strFileName = 'svcclf'+datetime.datetime.now().strftime("%Y%m%d%H%M%S")'
+    strFileName = 'svcclf'+datetime.datetime.now().strftime("%Y%m%d%H%M%S")
     strSavePath = './clfFile/'+strFileName
     joblib.dump(
         clfBagging, strSavePath)
