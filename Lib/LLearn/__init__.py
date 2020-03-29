@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 15:38:03
+@LastEditTime: 2020-03-29 15:46:12
 '''
 import json
 import jieba
@@ -33,7 +33,7 @@ def funGoLearn(funFB2C):
     dbMongo = dbClient[objConfig['sampledb']['database']]
     dbMongo.authenticate(objConfig['sampledb']
                          ['user'], objConfig['sampledb']['passwork'])
-    colSample['sampledb'] = dbMongo[objConfig['sampledb']['table']]
+    colSample = dbMongo[objConfig['sampledb']['table']]
     objLinkDB = claMongoDB(strCfgPath, 'mongodb')
 
     # 反馈给客户端信息
