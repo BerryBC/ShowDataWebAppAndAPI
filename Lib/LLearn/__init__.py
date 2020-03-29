@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 15:46:12
+@LastEditTime: 2020-03-29 16:13:23
 '''
 import json
 import jieba
@@ -17,6 +17,7 @@ import datetime
 
 from sklearn.svm import LinearSVC
 from configobj import ConfigObj
+from sklearn.ensemble import BaggingClassifier
 from Lib.LMongoDB import claMongoDB
 
 def funGoLearn(funFB2C):
@@ -143,11 +144,9 @@ def funGoLearn(funFB2C):
                 [dictAllResult['arrColunms'][intI], funGetEntropy(dfY[dfX[0]], 0)])
 
     dfEntropy = pd.DataFrame(arrKWForEntropy, columns=['KW', 'IE'])
-    print(dfEntropy.head(10))
     # 分桶
     cutB = pd.cut(dfEntropy['IE'], 2, labels=['L', 'H'])
     dfEntropy['IEBin'] = cutB
-    print(dfEntropy[dfEntropy['IEBin'] == 'L'])
 
     nparrKWWaitFor = dfEntropy[dfEntropy['IEBin'] == 'L']['KW'].values
 
