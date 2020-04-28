@@ -2,8 +2,8 @@
 @Descripttion: 数据管理库
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
-@LastEditors  : BerryBC
-@LastEditTime : 2020-02-12 18:36:02
+@LastEditors: BerryBC
+@LastEditTime: 2020-04-28 23:42:07
 '''
 
 import hashlib
@@ -104,6 +104,7 @@ def funLoadCountOfNumber():
     arrDatabaseTable.append({'tbName': 'sampledb', 'Desp': '样本'})
     arrDatabaseTable.append({'tbName': 'userdb-OL', 'Desp': '在线用户'})
     arrDatabaseTable.append({'tbName': 'userdb-AL', 'Desp': '全体用户'})
+    arrDatabaseTable.append({'tbName': 'clfdb-kw', 'Desp': '关键词样本数*天数'})
 
     for eleTable in arrDatabaseTable:
         strReturn += eleTable['Desp']+' 数据条数为:  ' + \
