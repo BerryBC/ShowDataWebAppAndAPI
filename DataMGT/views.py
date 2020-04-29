@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-24 23:13:19
+@LastEditTime: 2020-04-29 22:48:27
 '''
 
 import Lib.LUserCtrl as LuserCtrl
@@ -64,6 +64,13 @@ def funSklearnModelCreat(request):
     return HttpResponse(template.render({}, request))
 
 
+@LuserCtrl.decoratedPageCheckAcc
+def funClfSampleResult(request):
+    template = loader.get_template('loadlearnclfsample.html')
+    return HttpResponse(template.render({}, request))
+
+
+
 # ----------------- 以上页面 ----------------
 # ----------------- 以下API ----------------
 
@@ -71,7 +78,7 @@ def funSklearnModelCreat(request):
 @LuserCtrl.decoratedApiCheckAdm
 def apiLoadRandSample(request):
     intResult = 0
-    dictResult = LDataCtrl.funLoadOneSample()
+    dictResult = LDataCtrl.funLoadOneSample(False)
     if not dictResult['_id'] == '1024':
         intResult = 1
     resp = {'intBack': intResult, 'dictData': dictResult}
@@ -213,4 +220,16 @@ def apiSpyDataWithTag(request):
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAcc
+def apiLoadClfedSample(request):
+    intResult = 0
+    dictResult = LDataCtrl.funLoadOneSample(True)
+    if not dictResult['_id'] == '1024':
+        intResult = 1
+    resp = {'intBack': intResult, 'dictData': dictResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
 

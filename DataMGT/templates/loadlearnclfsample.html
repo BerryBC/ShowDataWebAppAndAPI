@@ -1,0 +1,46 @@
+<!--
+ * @Descripttion: 读取机器分类样本的内容
+ * @Author: BerryBC
+ * @Date: 2020-04-29 22:33:38
+ * @LastEditors: BerryBC
+ * @LastEditTime: 2020-04-29 23:03:42
+ -->
+
+
+{%extends "base.html" %} {% block mainbody %}
+<div class="container">
+    <section class="firstSection">
+        <h2>Load Machine Classification Samples Emotions</h2>
+        <div class="row m-auto justify-content-center">
+            <textarea id="taContent" rows="20"></textarea>
+
+        </div>
+        <hr class="mb-4">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="selPower">Emotions:</label>
+                <select class="custom-select d-block w-100" class="form-control" id="selEmo" required="">
+                    <option value=-1>Negative ( Bad )</option>
+                    <option value=0 selected>Useless</option>
+                    <option value=1>Positive ( Good )</option>
+                </select>
+                <!-- <div class="radio">
+                    <input type="radio" name="radEmo" value="-1"> Negative ( Bad )</input><br/>
+                    <input type="radio" name="radEmo" value="0"> Useless</input><br/>
+                    <input type="radio" name="radEmo" value="1"> Positive ( Good )</input><br/>
+                </div> -->
+            </div>
+            <div class="col-md-6 mb-3 ">
+                <label for="lbID">Content ID:</label>
+                <!-- <div class="alert alert-dark " role="alert"> -->
+                <input disabled="value" id="lbID" value="1024" class="form-control"></label>
+                <!-- </div> -->
+            </div>
+            <div class="col-md-12 mb-3 "><button class="btn btn-danger btn-lg btn-block" id='btnNext'>Next sample</button></div>
+        </div>
+    </section>
+</div>
+
+
+<script src="/static/data/js/loadlearnclfsample.js?q=2020040292303" type="text/javascript"></script>
+<link href="/static/data/css/data.css" rel="stylesheet" type="text/css" /> {% endblock %}

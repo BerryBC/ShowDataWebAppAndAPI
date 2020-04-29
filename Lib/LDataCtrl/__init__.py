@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 21:25:04
+@LastEditTime: 2020-04-29 22:56:51
 '''
 
 import hashlib
@@ -28,10 +28,10 @@ objConfig = ConfigObj(strCfgPath)
 objLinkDB = claMongoDB(strCfgPath, 'mongodb')
 
 
-def funLoadOneSample():
+def funLoadOneSample(bolIsJed):
     dictReturn = {}
     arrDataEle = []
-    eleOneSample = objLinkDB.LoadRandomLimit('sampledb', {'cf': False}, 1)
+    eleOneSample = objLinkDB.LoadRandomLimit('sampledb', {'cf': False,'jed':bolIsJed}, 1)
     for eleData in eleOneSample:
         arrDataEle.append(eleData)
     if len(arrDataEle) == 0:
@@ -40,7 +40,8 @@ def funLoadOneSample():
     else:
         dictReturn = arrDataEle[0]
         dictReturn = {'_id': str(dictReturn.get('_id')),
-                      'ct': dictReturn.get('ct')}
+                      'ct': dictReturn.get('ct'),
+                      'e':str(dictReturn.get('e'))}
     return dictReturn
 
 

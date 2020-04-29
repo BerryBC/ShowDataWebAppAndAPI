@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-24 23:14:16
+@LastEditTime: 2020-04-29 22:48:48
 '''
 
 from django.urls import path
@@ -19,6 +19,7 @@ urlpatterns = [
     path('custommgt/', views.funMGTCustom, name='ManageData'),
     path('spydata/', views.funSpyDataCheck, name='ManageData'),
     path('sklc/', views.funSklearnModelCreat, name='ManageData'),
+    path('loadlearnclfsample/', views.funClfSampleResult, name='ManageData'),
 
 
 
@@ -26,7 +27,8 @@ urlpatterns = [
     path('randdata/', views.apiLoadRandSample, name='ManageData'),
     path('confirmsample/', views.apiConfirmSample, name='ManageData'),
     path('insertonesample/', views.apiInsertSample, name='ManageData'),
-    path('deletesamplewithkw/', views.apiDeleteSampleWithKeyW, name='ManageData'),
+    path('deletesamplewithkw/', views.apiDeleteSampleWithKeyW, name='ManageData'),    
+    path('clfeddata/', views.apiLoadClfedSample, name='ManageData'),
 
     # 重用页面管理
     path('insertnewreusablesite/', views.apiInsertReusableSite, name='ManageData'),

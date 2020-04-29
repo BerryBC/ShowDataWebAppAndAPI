@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-03-29 17:23:31
+@LastEditTime: 2020-04-29 23:07:57
 '''
 import json
 import jieba
@@ -196,6 +196,8 @@ def funGoLearn(funFB2C):
     dateNow=parser.parse(strNow)
     dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor.tolist(),'lt':dateNow}
     objLinkDB.InsertOne('clfdb', dictData)
+    clfBagging=None
+    
 
     # 输出文件名
     funFB2C('classification file is : '+ strFileName, 2)
