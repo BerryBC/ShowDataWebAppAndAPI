@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 23:07:57
+@LastEditTime: 2020-04-29 23:43:45
 '''
 import json
 import jieba
@@ -181,7 +181,7 @@ def funGoLearn(funFB2C):
     # 开始学习
     funFB2C('Start Learn', 2)
     clfBagging = BaggingClassifier(base_estimator=LinearSVC(
-        random_state=0, tol=1e-05, max_iter=10000))
+        random_state=0, tol=1e-04, max_iter=10000))
     clfBagging.fit(arrXForTrainReal, arrYForTrainReal)
 
 
