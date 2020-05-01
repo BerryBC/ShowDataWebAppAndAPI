@@ -3,11 +3,12 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 22:48:27
+@LastEditTime: 2020-05-01 23:57:34
 '''
 
 import Lib.LUserCtrl as LuserCtrl
 import Lib.LDataCtrl as LDataCtrl
+import Lib.LLearn as LLearn
 import Lib.LSpy as LSpy
 
 import json
@@ -67,6 +68,12 @@ def funSklearnModelCreat(request):
 @LuserCtrl.decoratedPageCheckAcc
 def funClfSampleResult(request):
     template = loader.get_template('loadlearnclfsample.html')
+    return HttpResponse(template.render({}, request))
+
+
+@LuserCtrl.decoratedPageCheckAcc
+def funJudEmoByCT(request):
+    template = loader.get_template('judctemo.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -230,6 +237,18 @@ def apiLoadClfedSample(request):
     if not dictResult['_id'] == '1024':
         intResult = 1
     resp = {'intBack': intResult, 'dictData': dictResult}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAcc
+def apiJudEMO(request):
+    intResult = 1
+    strCT=request.POST.get('ct')
+    intEMO = LLearn.JudContent([strCT],True)
+    resp = {'intBack': intResult, 'intEMO': intEMO}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 

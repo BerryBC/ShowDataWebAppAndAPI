@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 22:48:48
+@LastEditTime: 2020-05-01 23:46:05
 '''
 
 from django.urls import path
@@ -20,6 +20,7 @@ urlpatterns = [
     path('spydata/', views.funSpyDataCheck, name='ManageData'),
     path('sklc/', views.funSklearnModelCreat, name='ManageData'),
     path('loadlearnclfsample/', views.funClfSampleResult, name='ManageData'),
+    path('judctemo/', views.funJudEmoByCT, name='ManageData'),
 
 
 
@@ -27,7 +28,7 @@ urlpatterns = [
     path('randdata/', views.apiLoadRandSample, name='ManageData'),
     path('confirmsample/', views.apiConfirmSample, name='ManageData'),
     path('insertonesample/', views.apiInsertSample, name='ManageData'),
-    path('deletesamplewithkw/', views.apiDeleteSampleWithKeyW, name='ManageData'),    
+    path('deletesamplewithkw/', views.apiDeleteSampleWithKeyW, name='ManageData'),
     path('clfeddata/', views.apiLoadClfedSample, name='ManageData'),
 
     # 重用页面管理
@@ -45,6 +46,9 @@ urlpatterns = [
 
     # 试爬网页
     path('spydatawithtag/', views.apiSpyDataWithTag, name='ManageData'),
+
+    # 判断情绪结果
+    path('judemo/', views.apiJudEMO, name='ManageData'),
 
     
 ]

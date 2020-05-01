@@ -2,8 +2,8 @@
 @Descripttion: 链接 MongoDB 的库
 @Author: BerryBC
 @Date: 2020-02-02 11:21:44
-@LastEditors  : BerryBC
-@LastEditTime : 2020-02-13 00:39:37
+@LastEditors: BerryBC
+@LastEditTime: 2020-05-01 16:21:41
 '''
 
 from configobj import ConfigObj
@@ -79,3 +79,6 @@ class claMongoDB(object):
 
     def LoadSome(self, strTbCfgSet, dictFilter):
         return self.GetTable(strTbCfgSet).find(dictFilter)
+
+    def LoadOneBySort(self, strTbCfgSet, dictFilter, arrSort):
+        return self.GetTable(strTbCfgSet).find_one(dictFilter, sort=arrSort)

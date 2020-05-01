@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 23:43:45
+@LastEditTime: 2020-05-01 16:23:56
 '''
 import json
 import jieba
@@ -201,3 +201,73 @@ def funGoLearn(funFB2C):
 
     # 输出文件名
     funFB2C('classification file is : '+ strFileName, 2)
+
+
+
+def JudContent(arrP,bolIsJustText):
+
+    strCfgPath = './cfg/dbCfg.ini'
+    objConfig = ConfigObj(strCfgPath)
+
+    strDBPW = objConfig['mongodb']['passwork']
+    strDBUser = objConfig['mongodb']['user']
+    strPort = objConfig['mongodb']['port']
+    strDBName = objConfig['mongodb']['database']
+    strDBHost = objConfig['mongodb']['hosts']
+    dbClient = pymongo.MongoClient('mongodb://'+strDBHost+':'+strPort+'/')
+    dbMongo = dbClient[objConfig['sampledb']['database']]
+    dbMongo.authenticate(objConfig['sampledb']
+                         ['user'], objConfig['sampledb']['passwork'])
+    colSample = dbMongo[objConfig['sampledb']['table']]
+    objLinkDB = claMongoDB(strCfgPath, 'mongodb')
+
+    objLatestClfCfg=objLinkDB.LoadOneBySort('clfdb', {}, [('lt', -1)])
+    clfLatestClf = joblib.load('./ClfFile/'+objLatestClfCfg['clfFileName'])
+
+    bolNotUseless = False
+    intEmo = 0
+    strPContent = ''
+    if bolIsJustText:
+        for eleP in arrP:
+            strPContent += eleP.strip()+'\n'
+    else:
+        for eleP in arrP:
+            strPContent += eleP.get_text().strip()+'\n'
+
+    genSampleWord = jieba.cut(strPContent, cut_all=False)
+    arrContentKW = []
+    # 对分词之后的每个关键字进行处理
+    for eleKW in genSampleWord:
+            # 如果前期没有该关键字即进行下一步
+        if not eleKW in arrContentKW:
+            arrContentKW.append(eleKW)
+
+    arrKWToClf = []
+    for eleKW in objLatestClfCfg["kwlist"]:
+        if eleKW in arrContentKW:
+            arrKWToClf.append(True)
+            bolNotUseless = True
+        else:
+            arrKWToClf.append(False)
+
+    intTmpCount = 0
+    if bolNotUseless:
+        # print("有一个神奇的情绪产生了")
+        intEmo = int(clfLatestClf.predict([arrKWToClf])[0])
+        for eleKW in arrContentKW:
+            intTmpCount += 1
+            strNow = datetime.datetime.now().strftime("%Y/%m/%d")
+            dateNow = parser.parse(strNow)
+            objWordNum = objLinkDB.LoadOne(
+                'clfdb-kw', {'date': dateNow, 'kw': eleKW, 'e': intEmo})
+            if objWordNum is None:
+                objLinkDB.InsertOne(
+                    'clfdb-kw', {'date': dateNow, 'kw': eleKW, 'e': intEmo, 'num': 1})
+            else:
+                objLinkDB.UpdateOneData(
+                    'clfdb-kw', {'date': dateNow, 'kw': eleKW, 'e': intEmo}, {'num': objWordNum['num']+1})
+        # print("你更新了 " + str( intTmpCount)+" 个词！")
+
+    # print("完事了")
+
+    return intEmo
