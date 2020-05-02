@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-01 16:23:56
+@LastEditTime: 2020-05-02 09:52:04
 '''
 import json
 import jieba
@@ -42,11 +42,11 @@ def funGoLearn(funFB2C):
     # 反馈给客户端信息
     funFB2C('Start Load Sample', 2)
     curPos = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': 1}}, {'$sample': {'size': 300}}])
+        [{'$match': {'cf': True, 'e': 1}}, {'$sample': {'size': 500}}])
     curUseless = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 200}}])
+        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 500}}])
     curNeg = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': -1}}, {'$sample': {'size': 300}}])
+        [{'$match': {'cf': True, 'e': -1}}, {'$sample': {'size': 500}}])
 
     arrStopWord = [' ', '\n', '\t']
 
@@ -181,7 +181,7 @@ def funGoLearn(funFB2C):
     # 开始学习
     funFB2C('Start Learn', 2)
     clfBagging = BaggingClassifier(base_estimator=LinearSVC(
-        random_state=0, tol=1e-04, max_iter=10000))
+        random_state=0, tol=1e-03, max_iter=1000))
     clfBagging.fit(arrXForTrainReal, arrYForTrainReal)
 
 
