@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-02 10:20:09
+@LastEditTime: 2020-05-04 18:00:20
 '''
 import json
 import jieba
@@ -44,7 +44,7 @@ def funGoLearn(funFB2C):
     curPos = colSample.aggregate(
         [{'$match': {'cf': True, 'e': 1}}, {'$sample': {'size': 300}}])
     curUseless = colSample.aggregate(
-        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 200}}])
+        [{'$match': {'cf': True, 'e': 0}}, {'$sample': {'size': 150}}])
     curNeg = colSample.aggregate(
         [{'$match': {'cf': True, 'e': -1}}, {'$sample': {'size': 300}}])
 
