@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors: BerryBC
-@LastEditTime: 2020-04-29 22:56:51
+@LastEditTime: 2020-05-05 22:37:52
 '''
 
 import hashlib
@@ -121,12 +121,6 @@ def funLoadCountOfNumber():
     strReturn+='  --机器判断及情绪为 正面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':1,'cf':False, 'jed': True}).count())+'\n'
     strReturn+='  --机器判断及情绪为 无价值 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':0,'cf':False, 'jed': True}).count())+'\n'
     strReturn+='  --机器判断及情绪为 负面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':-1,'cf':False, 'jed': True}).count())+'\n'
-
-
-    strReturn+='  已经判断及情绪为 正面 的词语数*天数条数为:  '+str(objLinkDB.LoadSome('clfdb-kw',{'e':1}).count())+'\n'
-    strReturn+='  已经判断及情绪为 无价值 的词语数*天数条数为:  '+str(objLinkDB.LoadSome('clfdb-kw',{'e':0}).count())+'\n'
-    strReturn+='  已经判断及情绪为 负面 的词语数*天数条数为:  '+str(objLinkDB.LoadSome('clfdb-kw',{'e':-1}).count())+'\n'
-
     
     return strReturn
 
