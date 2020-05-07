@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-22 20:41:56
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-04 18:00:20
+@LastEditTime: 2020-05-07 22:49:59
 '''
 import json
 import jieba
@@ -14,6 +14,7 @@ import numpy as np
 import joblib
 import os
 import datetime
+import gc
 
 
 from dateutil import parser
@@ -21,6 +22,7 @@ from sklearn.svm import LinearSVC
 from configobj import ConfigObj
 from sklearn.ensemble import BaggingClassifier
 from Lib.LMongoDB import claMongoDB
+
 
 def funGoLearn(funFB2C):
 
@@ -177,13 +179,11 @@ def funGoLearn(funFB2C):
             arrXForTrainReal.append(arrForTrain[intI])
             arrYForTrainReal.append(arrYPreTrain[intI])
 
-
     # 开始学习
     funFB2C('Start Learn', 2)
     clfBagging = BaggingClassifier(base_estimator=LinearSVC(
         random_state=0, tol=1e-03, max_iter=1000))
     clfBagging.fit(arrXForTrainReal, arrYForTrainReal)
-
 
     # 输出信息
     funFB2C('Output Data', 2)
@@ -193,18 +193,28 @@ def funGoLearn(funFB2C):
         clfBagging, strSavePath)
 
     strNow = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S")
-    dateNow=parser.parse(strNow)
-    dictData={'clfFileName':strFileName,'kwlist':nparrKWWaitFor.tolist(),'lt':dateNow}
+    dateNow = parser.parse(strNow)
+    dictData = {'clfFileName': strFileName,
+                'kwlist': nparrKWWaitFor.tolist(), 'lt': dateNow}
     objLinkDB.InsertOne('clfdb', dictData)
-    clfBagging=None
-    
+    clfBagging = None
+
+    del clfBagging
+    del dictData
+    del nparrKWWaitFor
+    del dbClient
+    del dbMongo
+    del colSample
+    del curPos
+    del curUseless
+    del curNeg
+    gc.collect()
 
     # 输出文件名
-    funFB2C('classification file is : '+ strFileName, 2)
+    funFB2C('classification file is : ' + strFileName, 2)
 
 
-
-def JudContent(arrP,bolIsJustText):
+def JudContent(arrP, bolIsJustText):
 
     strCfgPath = './cfg/dbCfg.ini'
     objConfig = ConfigObj(strCfgPath)
@@ -221,7 +231,7 @@ def JudContent(arrP,bolIsJustText):
     colSample = dbMongo[objConfig['sampledb']['table']]
     objLinkDB = claMongoDB(strCfgPath, 'mongodb')
 
-    objLatestClfCfg=objLinkDB.LoadOneBySort('clfdb', {}, [('lt', -1)])
+    objLatestClfCfg = objLinkDB.LoadOneBySort('clfdb', {}, [('lt', -1)])
     clfLatestClf = joblib.load('./ClfFile/'+objLatestClfCfg['clfFileName'])
 
     bolNotUseless = False
@@ -269,5 +279,9 @@ def JudContent(arrP,bolIsJustText):
         # print("你更新了 " + str( intTmpCount)+" 个词！")
 
     # print("完事了")
+
+    del arrContentKW
+    del clfLatestClf
+    gc.collect()
 
     return intEmo
