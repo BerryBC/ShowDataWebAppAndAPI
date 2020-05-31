@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-05-21 22:13:31
  * @LastEditors: BerryBC
- * @LastEditTime: 2020-05-31 13:57:11
+ * @LastEditTime: 2020-05-31 14:03:18
  */
 var gobjData = {};
 var chartPie = echarts.init(document.getElementById('divPieChart'));
@@ -84,7 +84,7 @@ function SelectKW() {
                 type: 'pie',
                 hoverAnimation: true,
                 radius: ['40%', '70%'],
-                avoidLabelOverlap: false,
+                avoidLabelOverlap: true,
                 label: {
                     position: 'outer',
                     alignTo: 'labelLine',
@@ -117,7 +117,7 @@ function SelectKW() {
                     type: 'pie',
                     hoverAnimation: true,
                     radius: ['40%', '70%'],
-                    avoidLabelOverlap: false,
+                    avoidLabelOverlap: true,
                     label: {
                         position: 'outer',
                         alignTo: 'labelLine',
