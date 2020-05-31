@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-02 11:21:44
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-01 16:21:41
+@LastEditTime: 2020-05-31 11:05:07
 '''
 
 from configobj import ConfigObj
@@ -82,3 +82,6 @@ class claMongoDB(object):
 
     def LoadOneBySort(self, strTbCfgSet, dictFilter, arrSort):
         return self.GetTable(strTbCfgSet).find_one(dictFilter, sort=arrSort)
+
+    def LoadLimitBySort(self, strTbCfgSet, dictFilter, arrSort, intLimit):
+        return self.GetTable(strTbCfgSet).find(dictFilter, sort=arrSort).limit(intLimit)

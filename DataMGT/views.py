@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-01 23:57:34
+@LastEditTime: 2020-05-31 11:10:56
 '''
 
 import Lib.LUserCtrl as LuserCtrl
@@ -74,6 +74,13 @@ def funClfSampleResult(request):
 @LuserCtrl.decoratedPageCheckAcc
 def funJudEmoByCT(request):
     template = loader.get_template('judctemo.html')
+    return HttpResponse(template.render({}, request))
+
+
+
+@LuserCtrl.decoratedPageCheckAcc
+def funPieChart(request):
+    template = loader.get_template('piechart.html')
     return HttpResponse(template.render({}, request))
 
 
@@ -249,6 +256,18 @@ def apiJudEMO(request):
     strCT=request.POST.get('ct')
     intEMO = LLearn.JudContent([strCT],True)
     resp = {'intBack': intResult, 'intEMO': intEMO}
+    return HttpResponse(content=json.dumps(
+        resp), content_type='application/json;charset = utf-8', charset='utf-8')
+
+
+
+@csrf_exempt
+@LuserCtrl.decoratedApiCheckAcc
+def apiGetKWEmo(request):
+    intResult = 1
+    strkw=request.POST.get('kw')
+    arrEMOWithKW = LDataCtrl.funLoadKW(strkw)
+    resp = {'intBack': intResult, 'arrKWsEMO': arrEMOWithKW}
     return HttpResponse(content=json.dumps(
         resp), content_type='application/json;charset = utf-8', charset='utf-8')
 

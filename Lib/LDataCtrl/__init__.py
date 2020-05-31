@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-05 22:37:52
+@LastEditTime: 2020-05-31 12:50:31
 '''
 
 import hashlib
@@ -31,7 +31,8 @@ objLinkDB = claMongoDB(strCfgPath, 'mongodb')
 def funLoadOneSample(bolIsJed):
     dictReturn = {}
     arrDataEle = []
-    eleOneSample = objLinkDB.LoadRandomLimit('sampledb', {'cf': False,'jed':bolIsJed}, 1)
+    eleOneSample = objLinkDB.LoadRandomLimit(
+        'sampledb', {'cf': False, 'jed': bolIsJed}, 1)
     for eleData in eleOneSample:
         arrDataEle.append(eleData)
     if len(arrDataEle) == 0:
@@ -41,7 +42,7 @@ def funLoadOneSample(bolIsJed):
         dictReturn = arrDataEle[0]
         dictReturn = {'_id': str(dictReturn.get('_id')),
                       'ct': dictReturn.get('ct'),
-                      'e':str(dictReturn.get('e'))}
+                      'e': str(dictReturn.get('e'))}
     return dictReturn
 
 
@@ -111,17 +112,28 @@ def funLoadCountOfNumber():
         strReturn += eleTable['Desp']+' 数据条数为:  ' + \
             str(objLinkDB.LoadAllData(eleTable['tbName']).count()) + '\n'
     # print(objDeleted.deleted_count)
-    
-    strReturn+='  已经判断及情绪为 正面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':1,'cf':True}).count())+'\n'
-    strReturn+='  已经判断及情绪为 无价值 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':0,'cf':True}).count())+'\n'
-    strReturn+='  已经判断及情绪为 负面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':-1,'cf':True}).count())+'\n'
 
-    strReturn+='  --机器判定的样本数为:  '+str(objLinkDB.LoadSome('sampledb',{'cf': False, 'jed': True}).count())+'\n'
+    strReturn += '  已经判断及情绪为 正面 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {'e': 1, 'cf': True}).count())+'\n'
+    strReturn += '  已经判断及情绪为 无价值 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {'e': 0, 'cf': True}).count())+'\n'
+    strReturn += '  已经判断及情绪为 负面 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {'e': -1, 'cf': True}).count())+'\n'
 
-    strReturn+='  --机器判断及情绪为 正面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':1,'cf':False, 'jed': True}).count())+'\n'
-    strReturn+='  --机器判断及情绪为 无价值 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':0,'cf':False, 'jed': True}).count())+'\n'
-    strReturn+='  --机器判断及情绪为 负面 的数据条数为:  '+str(objLinkDB.LoadSome('sampledb',{'e':-1,'cf':False, 'jed': True}).count())+'\n'
-    
+    strReturn += '  --机器判定的样本数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {
+            'cf': False, 'jed': True}).count())+'\n'
+
+    strReturn += '  --机器判断及情绪为 正面 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {
+            'e': 1, 'cf': False, 'jed': True}).count())+'\n'
+    strReturn += '  --机器判断及情绪为 无价值 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {
+            'e': 0, 'cf': False, 'jed': True}).count())+'\n'
+    strReturn += '  --机器判断及情绪为 负面 的数据条数为:  ' + \
+        str(objLinkDB.LoadSome('sampledb', {
+            'e': -1, 'cf': False, 'jed': True}).count())+'\n'
+
     return strReturn
 
 
@@ -145,9 +157,39 @@ def funInsertCustom(strInTag, strInRURL):
     return intResult
 
 
-
 def funDeleteCustom(strInID):
     intResult = 0
     objLinkDB.DeleteSome('pagedb-Custom', {'_id': ObjectId(strInID)})
     intResult = 1
     return intResult
+
+
+def funLoadKW(strKW):
+    # arrReturn = []
+    # if strKW != "":
+    #     dictExactMatch=objLinkDB.LoadOne('clfdb-kw', {'kw':  strKW})
+    #     arrReturn.append(dictExactMatch)
+    #     curTarget = objLinkDB.LoadRandomLimit(
+    #         'clfdb-kw', {'kw': {'$regex': strKW, '$options': "i"}}, 20)
+    #     for eleCur in curTarget:
+    #         if eleCur["kw"]!=dictExactMatch["kw"]:
+    #             arrReturn.append(eleCur)
+    # return arrReturn
+    arrReturn = []
+    if strKW != "":
+        bolNull = True
+        dictExactMatch = objLinkDB.LoadOne('clfdb-kw', {'kw':  strKW})
+        if dictExactMatch is not None:
+            arrReturn.append(dictExactMatch)
+            bolNull = False
+        curTarget = objLinkDB.LoadRandomLimit(
+            'clfdb-kw', {'kw': {'$regex': strKW, '$options': "i"}}, 20)
+        for eleCur in curTarget:
+            dictNow={}
+            if not bolNull and eleCur['kw'] == dictExactMatch['kw']:
+                pass
+            else:
+                dictNow['kw']=eleCur['kw']
+                dictNow['num']=eleCur['num']
+                arrReturn.append(dictNow)
+    return arrReturn

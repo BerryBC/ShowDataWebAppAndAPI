@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:01:03
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-01 23:46:05
+@LastEditTime: 2020-05-31 11:32:43
 '''
 
 from django.urls import path
@@ -21,6 +21,7 @@ urlpatterns = [
     path('sklc/', views.funSklearnModelCreat, name='ManageData'),
     path('loadlearnclfsample/', views.funClfSampleResult, name='ManageData'),
     path('judctemo/', views.funJudEmoByCT, name='ManageData'),
+    path('piechart/', views.funPieChart, name='ManageData'),
 
 
 
@@ -50,5 +51,7 @@ urlpatterns = [
     # 判断情绪结果
     path('judemo/', views.apiJudEMO, name='ManageData'),
 
-    
+
+    # 读取关键词情绪    
+    path('kwemo/', views.apiGetKWEmo, name='ManageData'),
 ]
