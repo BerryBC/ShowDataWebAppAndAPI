@@ -3,7 +3,7 @@
  * @Author: BerryBC
  * @Date: 2020-05-21 22:13:31
  * @LastEditors: BerryBC
- * @LastEditTime: 2020-05-31 12:57:06
+ * @LastEditTime: 2020-05-31 13:14:27
  */
 var gobjData = {};
 var chartPie = echarts.init(document.getElementById('divPieChart'));
@@ -120,7 +120,7 @@ function InsertSelector(arrKWs) {
     if (arrKWs.length > 0) {
         for (var intI = 0; intI < arrKWs.length; intI++) {
             gobjData[arrKWs[intI].kw] = arrKWs[intI].num;
-            selKW.append('<option value="' + arrKWs[intI].kw + 's">' + arrKWs[intI].kw + '</option>');
+            selKW.append('<option value="' + arrKWs[intI].kw + '">' + arrKWs[intI].kw + '</option>');
         };
     } else {
         ShowModal(false, 'None record for this keyword');
