@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-31 12:50:31
+@LastEditTime: 2020-05-31 13:08:57
 '''
 
 import hashlib
@@ -180,16 +180,19 @@ def funLoadKW(strKW):
         bolNull = True
         dictExactMatch = objLinkDB.LoadOne('clfdb-kw', {'kw':  strKW})
         if dictExactMatch is not None:
-            arrReturn.append(dictExactMatch)
+            dictNow = {}
+            dictNow['kw'] = dictExactMatch['kw']
+            dictNow['num'] = dictExactMatch['num']
+            arrReturn.append(dictNow)
             bolNull = False
         curTarget = objLinkDB.LoadRandomLimit(
             'clfdb-kw', {'kw': {'$regex': strKW, '$options': "i"}}, 20)
         for eleCur in curTarget:
-            dictNow={}
+            dictNow = {}
             if not bolNull and eleCur['kw'] == dictExactMatch['kw']:
                 pass
             else:
-                dictNow['kw']=eleCur['kw']
-                dictNow['num']=eleCur['num']
+                dictNow['kw'] = eleCur['kw']
+                dictNow['num'] = eleCur['num']
                 arrReturn.append(dictNow)
     return arrReturn
