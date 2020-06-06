@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-18 19:00:21
 @LastEditors: BerryBC
-@LastEditTime: 2020-02-18 21:59:17
+@LastEditTime: 2020-06-06 11:15:25
 '''
 
 import time
@@ -37,7 +37,7 @@ def funSpyDataWithTag(strInURL, strInTag):
             '/usr/bin/chromedriver', chrome_options=options)
         browserChorme.set_page_load_timeout(10)
         browserChorme.set_script_timeout(10)
-        browserChorme.implicitly_wait(20)
+        browserChorme.implicitly_wait(40)
         browserChorme.get(strInURL)
         strhtml = browserChorme.page_source
         browserChorme.close()
