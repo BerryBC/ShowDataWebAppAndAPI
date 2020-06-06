@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-18 19:00:21
 @LastEditors: BerryBC
-@LastEditTime: 2020-06-06 11:15:25
+@LastEditTime: 2020-06-06 11:27:01
 '''
 
 import time
@@ -39,6 +39,7 @@ def funSpyDataWithTag(strInURL, strInTag):
         browserChorme.set_script_timeout(10)
         browserChorme.implicitly_wait(40)
         browserChorme.get(strInURL)
+        time.sleep(30)
         strhtml = browserChorme.page_source
         browserChorme.close()
         browserChorme.quit()
