@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 13:52:49
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-31 13:08:57
+@LastEditTime: 2020-06-08 23:51:55
 '''
 
 import hashlib
@@ -33,6 +33,23 @@ def funLoadOneSample(bolIsJed):
     arrDataEle = []
     eleOneSample = objLinkDB.LoadRandomLimit(
         'sampledb', {'cf': False, 'jed': bolIsJed}, 1)
+    for eleData in eleOneSample:
+        arrDataEle.append(eleData)
+    if len(arrDataEle) == 0:
+        dictReturn = {'_id': '1024', 'ct': '',
+                      'e': 0, 'cf': False, 'jed': False, 't': 0}
+    else:
+        dictReturn = arrDataEle[0]
+        dictReturn = {'_id': str(dictReturn.get('_id')),
+                      'ct': dictReturn.get('ct'),
+                      'e': str(dictReturn.get('e'))}
+    return dictReturn
+
+def funLoadOneSampleWhatEver():
+    dictReturn = {}
+    arrDataEle = []
+    eleOneSample = objLinkDB.LoadRandomLimit(
+        'sampledb', {'cf': False}, 1)
     for eleData in eleOneSample:
         arrDataEle.append(eleData)
     if len(arrDataEle) == 0:

@@ -3,7 +3,7 @@
 @Author: BerryBC
 @Date: 2020-02-05 12:13:17
 @LastEditors: BerryBC
-@LastEditTime: 2020-05-31 11:10:56
+@LastEditTime: 2020-06-08 23:52:22
 '''
 
 import Lib.LUserCtrl as LuserCtrl
@@ -92,7 +92,7 @@ def funPieChart(request):
 @LuserCtrl.decoratedApiCheckAdm
 def apiLoadRandSample(request):
     intResult = 0
-    dictResult = LDataCtrl.funLoadOneSample(False)
+    dictResult = LDataCtrl.funLoadOneSampleWhatEver()
     if not dictResult['_id'] == '1024':
         intResult = 1
     resp = {'intBack': intResult, 'dictData': dictResult}
