@@ -3,13 +3,13 @@
  * @Author: BerryBC
  * @Date: 2020-02-23 10:38:36
  * @LastEditors: BerryBC
- * @LastEditTime: 2020-03-29 16:24:36
+ * @LastEditTime: 2020-06-09 20:27:06
  */
 $(function() {
     $('#btnCreat')[0].onclick = function() {
         if ("WebSocket" in window) {
             var domain = window.location.host;
-            wsSocks = new WebSocket("ws://" + domain + "/ws/data/sklcws/");
+            wsSocks = new WebSocket("wss://" + domain + "/ws/data/sklcws/");
 
             $('#btnCreat').addClass('disabled');
             $('#btnCreat').attr('disabled', true);
